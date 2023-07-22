@@ -1,0 +1,17 @@
+<select [(ngModel)]="selectedSubcategory">
+    <option value="null">Todas las categorías</option>
+    <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+      {{ subcategory.nombre }}
+    </option>
+  </select>
+  
+  <div *ngFor="let product of filteredProducts()">
+    <div>
+      <h2>{{ product.nombre }}</h2>
+      <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
+      <p>Precio: ${{ product.precio }}</p>
+      <p>Categoria: {{ product.id_subcategoria}}</p>
+      <button (click)="addToCart(product)">Agregar al carrito</button>
+    </div>
+  </div>
+  
