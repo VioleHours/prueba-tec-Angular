@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Producto, Subcategoria } from '../product';
+import { CartProviderService } from '../cart-provider.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,10 @@ export class ProductComponent implements OnInit {
   subcategories: Subcategoria[] = [];
   selectedSubcategory: number | null = null;
 
-  constructor(public productService: ProductService) {}
+  constructor(
+    public productService: ProductService,
+    private cartProvider: CartProviderService
+  ) {}
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -33,8 +37,9 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Producto): void {
-    this.cart.push(product);
+    this.cartProvider.addToCart(product);
   }
+  
 
   filterProductsBySubcategory(subcategoryId: number | null): void {
     this.selectedSubcategory = subcategoryId;

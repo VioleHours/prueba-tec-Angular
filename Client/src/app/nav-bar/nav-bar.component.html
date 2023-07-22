@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <div class="navbar">
+      <div class="leftContainer">
+        <a routerLink="/">
+          <div class="logoContainer">
+            <img
+              class="logo"
+              src="/assets/logo-fix.png"
+              alt="Compra_Gamer_logo"
+            />
+          </div>
+        </a>
+      </div>
+        <div class="leftContainer">
+          <a routerLink="/productos">
+            <div class="logoContainer">
+              <button mat-stroked-button color="primary">Productos</button>
+            </div>
+          </a>
+          </div>
+      <div class="rightContainer">
+        <a routerLink="/cart">
+          <button class="cartButton">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Icono del carrito"
+              fontIcon="shopping_cart"
+            ></mat-icon>
+            <span *ngIf="cartItems.length > 0" class="productsNumber">{{
+              cartItems.length
+            }}</span>
+          </button>
+        </a>
+        <!-- <button *ngIf="!isLoggedIn" class="button" (click)="openModalRegister()">Registrarse</button> -->
+
+        <!-- Ejemplo: Botón para cerrar sesión -->
+        <!-- <button *ngIf="isLoggedIn" class="button" (click)="handlerLogout()">Logout</button> -->
+
+        <!-- Ejemplo: Botón para ver el perfil del usuario -->
+        <!-- <button *ngIf="isLoggedIn" class="button" (click)="handlerProfile()">Perfil</button> -->
+      </div>
+    </div>
+  </div>
+</nav>
