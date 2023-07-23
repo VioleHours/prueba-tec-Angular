@@ -1,1 +1,85 @@
-<p>registro works!</p>
+<form (ngSubmit)="onSubmit()">
+  <h2>Formulario de registro</h2>
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input
+      type="text"
+      id="nombre"
+      [(ngModel)]="nombre"
+      name="nombre"
+      required
+    />
+  </div>
+  <div>
+    <label for="apellido">Apellido:</label>
+    <input
+      type="text"
+      id="apellido"
+      [(ngModel)]="apellido"
+      name="apellido"
+      required
+    />
+  </div>
+  <div>
+    <label for="dni">DNI:</label>
+    <input
+      type="text"
+      id="dni"
+      [(ngModel)]="dni"
+      name="dni"
+      required
+    />
+  </div>
+  <div>
+    <label for="mail">Mail:</label>
+    <input
+      type="text"
+      id="mail"
+      [(ngModel)]="mail"
+      name="mail"
+      required
+    />
+  </div>
+  <div>
+    <label for="telefono">Telefono:</label>
+    <input
+      type="text"
+      id="telefono"
+      [(ngModel)]="telefono"
+      name="telefono"
+      required
+    />
+  </div>
+  <div>
+    <label for="direccion">Direccion:</label>
+    <input
+      type="text"
+      id="direccion"
+      [(ngModel)]="direccion"
+      name="direccion"
+      required
+    />
+  </div>
+  <div>
+    <label for="provincia">Provincia:</label>
+    <input
+      type="text"
+      id="provincia"
+      [(ngModel)]="provincia"
+      name="provincia"
+      required
+    />
+  </div>
+  <div>
+    <label for="codigoPostal">Codigo Postal:</label>
+    <input
+      type="text"
+      id="codigoPostal"
+      [(ngModel)]="codigoPostal"
+      name="codigoPostal"
+      required
+    />
+  </div>
+  <button type="submit">Registrar</button>
+  <button (click)="closeDialog()">Cerrar</button>
+</form>

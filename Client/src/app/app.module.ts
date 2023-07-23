@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CartProviderService } from './cart-provider.service';
 import { RouterModule } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { RouterModule } from '@angular/router';
     ProductComponent,
     NavBarComponent,
     CartComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatDialogModule,
     RouterModule,
+    MatSnackBarModule,
   ],
   providers: [CartProviderService],
   bootstrap: [AppComponent],
