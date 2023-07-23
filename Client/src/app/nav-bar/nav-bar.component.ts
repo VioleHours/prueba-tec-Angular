@@ -40,7 +40,7 @@ export class NavBarComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result && result.success) {
+      if (result && result.success === true) {
         this.snackBar.open('¡Registro exitoso!', 'Cerrar', {
           duration:3000
         });

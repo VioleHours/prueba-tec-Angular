@@ -14,6 +14,7 @@ import { CartProviderService } from './cart-provider.service';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegistroComponent } from './registro/registro.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RegistroComponent } from './registro/registro.component';
     MatDialogModule,
     RouterModule,
     MatSnackBarModule,
+    ReactiveFormsModule,
   ],
   providers: [CartProviderService],
   bootstrap: [AppComponent],
