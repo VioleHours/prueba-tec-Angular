@@ -1,0 +1,19 @@
+<div>
+  <select [(ngModel)]="selectedCategory" (change)="handleCategoryChange(selectedCategoryId)"> 
+    <option value="null">Todas las categorías</option>
+    <option *ngFor="let category of categories" [value]="category.id">
+      {{ category.nombre }}
+    </option>
+  </select>
+</div>
+
+<div *ngFor="let product of products | categoryFilter: selectedCategoryId">
+  <div>
+    <h2>{{ product.nombre }}</h2>
+    <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
+    <p>Precio: ${{ product.precio }}</p>
+    <p>Categoria: {{ getSubcategoryName(product.id_subcategoria) }}</p>
+    <button (click)="addToCart(product)">Agregar al carrito</button>
+  </div>
+</div>
+

@@ -34,10 +34,10 @@
 //   }
 
 import { Component, OnInit } from '@angular/core';
-import { CartProviderService } from '../cart-provider.service';
+import { CartProviderService } from '../../service/cart-provider.service';
 import { ActivatedRoute } from '@angular/router';
-import { Producto } from '../product'; // Import the Producto interface
-import { ProductService } from '../product.service';
+import { Producto } from '../../product'; // Import the Producto interface
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'app-cart',
