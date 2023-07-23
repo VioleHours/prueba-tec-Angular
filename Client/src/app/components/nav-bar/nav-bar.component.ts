@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CartProviderService } from '../cart-provider.service';
+import { CartProviderService } from '../../service/cart-provider.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistroComponent } from '../registro/registro.component';
 import { Router } from '@angular/router';

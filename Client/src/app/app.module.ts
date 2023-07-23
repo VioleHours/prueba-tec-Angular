@@ -5,16 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductComponent } from './product/product.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { CartComponent } from './cart/cart.component';
+import { ProductComponent } from './components/product/product.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CartComponent } from './components/cart/cart.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CartProviderService } from './cart-provider.service';
+import { CartProviderService } from './service/cart-provider.service';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RegistroComponent } from './registro/registro.component';
+import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryFilterPipe } from './category-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavBarComponent,
     CartComponent,
     RegistroComponent,
+    CategoryFilterPipe,
   ],
   imports: [
     BrowserModule,
