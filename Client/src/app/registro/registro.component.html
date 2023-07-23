@@ -1,0 +1,61 @@
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <h2>Formulario de registro</h2>
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input type="text" formControlName="nombre" id="nombre" />
+    <div *ngIf="registroForm.controls['nombre'].invalid && registroForm.controls['nombre'].touched">
+      <div *ngIf="registroForm.controls['nombre'].errors?.['required']">Nombre requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="apellido">Apellido:</label>
+    <input type="text" formControlName="apellido" id="apellido" />
+    <div *ngIf="registroForm.controls['apellido'].invalid && registroForm.controls['apellido'].touched">
+      <div *ngIf="registroForm.controls['apellido'].errors?.['required']">Apellido requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="dni">DNI:</label>
+    <input type="text" formControlName="dni" id="dni" />
+    <div *ngIf="registroForm.controls['dni'].invalid && registroForm.controls['dni'].touched">
+      <div *ngIf="registroForm.controls['dni'].errors?.['required']">DNI requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="mail">Mail:</label>
+    <input type="text" formControlName="mail" id="mail" />
+    <div *ngIf="registroForm.controls['mail'].invalid && registroForm.controls['mail'].touched">
+      <div *ngIf="registroForm.controls['mail'].errors?.['required']">Mail requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="telefono">Telefono:</label>
+    <input type="text" formControlName="telefono" id="telefono" />
+    <div *ngIf="registroForm.controls['telefono'].invalid && registroForm.controls['telefono'].touched">
+      <div *ngIf="registroForm.controls['telefono'].errors?.['required']">Telefono requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="direccion">Dirección:</label>
+    <input type="text" formControlName="direccion" id="direccion" />
+    <div *ngIf="registroForm.controls['direccion'].invalid && registroForm.controls['direccion'].touched">
+      <div *ngIf="registroForm.controls['direccion'].errors?.['required']">Campo requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="provincia">Provincia:</label>
+    <input type="text" formControlName="provincia" id="provincia" />
+    <div *ngIf="registroForm.controls['provincia'].invalid && registroForm.controls['provincia'].touched">
+      <div *ngIf="registroForm.controls['provincia'].errors?.['required']">Campo requerido.</div>
+    </div>
+  </div>
+  <div>
+    <label for="codigoPostal">Codigo Postal:</label>
+    <input type="text" formControlName="codigoPostal" id="codigoPostal" />
+    <div *ngIf="registroForm.controls['codigoPostal'].invalid && registroForm.controls['codigoPostal'].touched">
+      <div *ngIf="registroForm.controls['codigoPostal'].errors?.['required']">Campo requerido.</div>
+    </div>
+  </div>
+  <button type="submit">Registrar</button>
+  <button (click)="closeDialog()">Cerrar</button>
+</form>
