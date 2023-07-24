@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Producto } from '../product';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { Producto } from '../product';
 export class CartProviderService {
   public cartItems: any[] = [];
   public cartItemsUpdated = new BehaviorSubject<Producto[]>([]);
+  public cartItemsChanged: Subject<Producto[]> = new Subject<Producto[]>();
 
   constructor() {}
 
@@ -21,15 +22,17 @@ export class CartProviderService {
   }
 
   addToCart(product: Producto) {
-    const existingProduct = this.cartItems.find((p: Producto) => p.id_producto === product.id_producto);
+    const existingProduct = this.cartItems.find(
+      (p: Producto) => p.id_producto === product.id_producto
+    );
     if (existingProduct) {
       existingProduct.stock = product.stock;
     } else {
       this.cartItems.push(product);
     }
     this.cartItemsUpdated.next(this.cartItems);
+    this.emitCartItemsChanged();
   }
-  
 
   getTotalPrice() {
     let totalGlobal = 0;
@@ -42,10 +45,13 @@ export class CartProviderService {
   }
 
   removeItems(productId: number) {
-    const index = this.cartItems.findIndex((product: Producto) => product.id_producto === productId);
+    const index = this.cartItems.findIndex(
+      (product: Producto) => product.id_producto === productId
+    );
     if (index !== -1) {
       this.cartItems.splice(index, 1);
       this.cartItemsUpdated.next(this.cartItems);
+      this.emitCartItemsChanged();
     }
   }
 
@@ -55,11 +61,18 @@ export class CartProviderService {
   }
 
   updateCartItem(updatedProduct: Producto) {
-    const index = this.cartItems.findIndex((product: Producto) => product.id_producto === updatedProduct.id_producto);
+    const index = this.cartItems.findIndex(
+      (product: Producto) => product.id_producto === updatedProduct.id_producto
+    );
     if (index !== -1) {
       this.cartItems[index].stock = updatedProduct.stock;
       this.cartItemsUpdated.next(this.cartItems);
+      this.emitCartItemsChanged();
     }
   }
-}
 
+  emitCartItemsChanged(): void {
+    this.cartItemsChanged.next(this.cartItems);
+  }
+  
+}

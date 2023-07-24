@@ -1,93 +1,92 @@
 .cart-card {
-    box-shadow: 0 10px 12px rgba(225, 89, 5, 0.182);
-  }
-  
-  .custom-button {
-    background-color: #000000;
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(225, 89, 5);
-    padding: 2px;
-    cursor: pointer;
-    font-size: 17px;
-    border-radius: 5px;
-  }
-  
-  .custom-icon {
-    font-size: 20px;
-  }
-  
-  .custom-button:hover {
-    background-color: rgb(225, 89, 5);
-    border: 1px solid #000000;
-    color: rgb(0, 0, 0);
-  }
-  
-  .quantityButton {
-    border-width: 0;
-  }
-  
-  .quantity {
-    font-size: x-large;
-  }
-  
-  .deleteButton {
-    bottom: 10px;
-    right: 10px;
-    left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff;
-    color: #000000;
-    border: 2px solid rgb(225, 89, 5);
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 17px;
-    border-radius: 5px;
-  }
-  
-  .deleteButton:hover {
-    align-items: center;
-    background-color: rgb(225, 89, 5);
-    border: 2px solid #000000;
-    color: rgb(255, 255, 255);
-  }
-  
+  box-shadow: 0 10px 12px rgba(225, 89, 5, 0.182);
+}
+
+.custom-button {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(225, 89, 5);
+  padding: 2px;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.custom-icon {
+  font-size: 20px;
+}
+
+.custom-button:hover {
+  background-color: rgb(225, 89, 5);
+  border: 1px solid #000000;
+  color: rgb(0, 0, 0);
+}
+
+.quantityButton {
+  border-width: 0;
+}
+
+.quantity {
+  font-size: x-large;
+}
+
+.deleteButton {
+  bottom: 10px;
+  right: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid rgb(225, 89, 5);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.deleteButton:hover {
+  align-items: center;
+  background-color: rgb(225, 89, 5);
+  border: 2px solid #000000;
+  color: rgb(255, 255, 255);
+}
+
 .finalizeButton {
-    bottom: 10px;
-    right: 10px;
-    left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    background-color: rgb(225, 89, 5);
-    color: rgb(255, 255, 255);
-  }
-  
-  .finalizeButton:hover {
-    background-color: rgba(243, 118, 40, 0.937);
-  }
-  
-  .registrationMessage {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .closeMessageButton {
-    margin-top: 10px;
-    background-color: #000000;
-    color: rgb(255, 255, 255);
-  }
-  
-  .closeMessageButton:hover {
-    background-color: #444444;
-  }
-  
+  bottom: 10px;
+  right: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: rgb(225, 89, 5);
+  color: rgb(255, 255, 255);
+}
+
+.finalizeButton:hover {
+  background-color: rgba(243, 118, 40, 0.937);
+}
+
+.registrationMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.closeMessageButton {
+  margin-top: 10px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+
+.closeMessageButton:hover {
+  background-color: #444444;
+}

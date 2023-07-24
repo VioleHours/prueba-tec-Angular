@@ -17,15 +17,15 @@ export class RegistroComponent implements OnInit {
   direccion: string = '';
   provincia: string = '';
   codigoPostal: string = '';
-  
+
   registroForm: FormGroup = new FormGroup({});
 
   constructor(private dialogRef: MatDialogRef<RegistroComponent>) {}
-  
+
   ngOnInit() {
     this.initForm();
   }
-  
+
   closeDialog(): void {
     this.dialogRef.close();
   }
@@ -34,16 +34,22 @@ export class RegistroComponent implements OnInit {
     this.registroForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       apellido: new FormControl('', [Validators.required]),
-      dni: new FormControl('', [Validators.required, Validators.pattern(/^\d{8}$/)]),
+      dni: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{8}$/),
+      ]),
       mail: new FormControl('', [Validators.required, Validators.email]),
-      telefono: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+      telefono: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{10}$/),
+      ]),
       direccion: new FormControl('', [Validators.required]),
       provincia: new FormControl('', [Validators.required]),
       codigoPostal: new FormControl('', [Validators.required]),
     });
   }
 
-  onSubmit() { 
+  onSubmit() {
     if (this.registroForm.valid) {
       const userData = this.registroForm.value;
       try {

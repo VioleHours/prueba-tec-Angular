@@ -5,43 +5,68 @@
         <mat-card-title>{{ product.nombre }}</mat-card-title>
         <mat-card-subtitle>$ {{ product.precio | number }}</mat-card-subtitle>
       </mat-card-title-group>
-      <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
+      <img
+        [src]="productService.getCompleteImageUrl(product)"
+        alt="{{ product.nombre }}"
+      />
     </mat-card-header>
     <mat-card-content>
       <div class="productInfo">
         <p class="productPrice">$ {{ product.precio | number }}</p>
         <div>
-          <p *ngIf="product.vendible">
-            Envío: <strong>gratis</strong>
-          </p>
+          <p *ngIf="product.vendible">Envío: <strong>gratis</strong></p>
         </div>
       </div>
       <div class="productActions">
         <div class="quantityContainer">
-          <button class="custom-button quantityButton" (click)="handleDecrement(product.id_producto)">
+          <button
+            class="custom-button quantityButton"
+            (click)="handleDecrement(product.id_producto)"
+          >
             <mat-icon class="custom-icon">-</mat-icon>
           </button>
-          <span class="quantity">{{ productCounts[product.id_producto] || 1 }}</span>
-          <button class="custom-button quantityButton" (click)="handleIncrement(product.id_producto)">
+          <span class="quantity">{{
+            productCounts[product.id_producto] || 1
+          }}</span>
+          <button
+            class="custom-button quantityButton"
+            (click)="handleIncrement(product.id_producto)"
+          >
             <mat-icon class="custom-icon">+</mat-icon>
           </button>
         </div>
-        <button class="deleteButton" (click)="handleRemove(product.id_producto)">Eliminar del carrito</button>
+        <button
+          class="deleteButton"
+          (click)="handleRemove(product.id_producto)"
+        >
+          Eliminar del carrito
+        </button>
       </div>
     </mat-card-content>
   </div>
 
   <div class="resumeContent">
     <div class="resumeDetails">
-      <p class="resumePrice">Total $ {{ total | number }}</p>
+      <p class="resumePrice">Total $ {{ total }}</p>
     </div>
   </div>
 
-  <button class="custom-button finalizeButton" (click)="handleFinalizePurchase()">Finalizar compra</button>
+  <button
+    class="custom-button finalizeButton"
+    (click)="handleFinalizePurchase()"
+  >
+    Finalizar compra
+  </button>
 </mat-card>
 
 <div class="registrationMessage" *ngIf="showRegistrationMessage">
-  <p>Para continuar con la compra, primero debes registrarte o iniciar sesión.</p>
-  <button class="custom-button closeMessageButton" (click)="closeRegistrationMessage()">Cerrar</button>
+  <p>
+    Para continuar con la compra, primero debes registrarte o iniciar sesión.
+  </p>
+  <button
+    class="custom-button closeMessageButton"
+    (click)="closeRegistrationMessage()"
+  >
+    Cerrar
+  </button>
 </div>
-

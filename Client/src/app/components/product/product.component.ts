@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Producto, Subcategoria } from '../../product';
 import { CartProviderService } from '../../service/cart-provider.service';
@@ -49,7 +49,6 @@ export class ProductComponent implements OnInit {
       });
     }
   }
-  
 
   addToCart(product: Producto): void {
     this.cartProvider.addToCart(product);
@@ -73,7 +72,7 @@ export class ProductComponent implements OnInit {
     this.fetchProducts();
     this.filterProducts();
     this.changeDetectorRef.detectChanges();
-}
+  }
 
   formatPrice(price: number): string {
     return price.toLocaleString('es-AR');

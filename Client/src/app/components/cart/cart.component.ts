@@ -7,7 +7,7 @@ import { ProductService } from '../../service/product.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
   cartItems: Producto[] = [];
@@ -20,8 +20,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartProvider: CartProviderService,
     private route: ActivatedRoute,
-    public productService: ProductService,
-  ) { }
+    public productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.loadCartData();
@@ -31,13 +31,18 @@ export class CartComponent implements OnInit {
       this.totalPrice();
       this.totalProducts();
       if (!this.cartIsEmpty) {
-        localStorage.setItem("cart", JSON.stringify(this.cartItems));
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
       }
+    });
+    this.cartProvider.cartItemsChanged.subscribe((cartItems) => {
+      this.cartItems = cartItems;
+      this.totalPrice();
+      this.totalProducts();
     });
   }
 
   loadCartData(): void {
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const savedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     if (savedCart.length > 0) {
       this.cartIsEmpty = false;
       savedCart.forEach((product: any) => {
@@ -50,7 +55,8 @@ export class CartComponent implements OnInit {
     let totalAux = 0;
     if (this.cartItems.length > 0) {
       this.cartItems.forEach((product: Producto) => {
-        totalAux += product.precio * this.productCounts[product.id_producto];
+        const quantity = this.productCounts[product.id_producto] || 0;
+        totalAux += product.precio * quantity;
       });
     }
     this.total = totalAux;
@@ -68,9 +74,11 @@ export class CartComponent implements OnInit {
 
   handleRemove(productId: number): void {
     this.cartProvider.removeItems(productId);
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const updatedCart = savedCart.filter((product: any) => product.id_producto !== productId);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    const savedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const updatedCart = savedCart.filter(
+      (product: any) => product.id_producto !== productId
+    );
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
 
     this.loadCartData();
     this.totalPrice();
@@ -79,16 +87,17 @@ export class CartComponent implements OnInit {
 
   handleIncrement(productId: number): void {
     this.productCounts[productId] = (this.productCounts[productId] || 0) + 1;
-    const productToUpdate = this.cartItems.find((product: Producto) => product.id_producto === productId);
+    const productToUpdate = this.cartItems.find(
+      (product: Producto) => product.id_producto === productId
+    );
     if (productToUpdate) {
       productToUpdate.stock = this.productCounts[productId];
       this.cartProvider.updateCartItem(productToUpdate);
-      this.total += productToUpdate.precio;
     }
-  
+
     this.totalProducts();
+    this.totalPrice();
   }
-  
 
   handleDecrement(productId: number): void {
     this.productCounts[productId] = (this.productCounts[productId] || 1) - 1;
@@ -96,19 +105,23 @@ export class CartComponent implements OnInit {
       delete this.productCounts[productId];
       this.cartProvider.removeItems(productId);
     } else {
-      const productToUpdate = this.cartItems.find((product: Producto) => product.id_producto === productId);
+      const productToUpdate = this.cartItems.find(
+        (product: Producto) => product.id_producto === productId
+      );
       if (productToUpdate) {
         productToUpdate.stock = this.productCounts[productId];
-        this.cartProvider.addToCart(productToUpdate);
+        this.cartProvider.updateCartItem(productToUpdate);
       }
     }
 
-    this.totalPrice();
     this.totalProducts();
+    this.totalPrice();
   }
 
   updateCartItemStock(productId: number, stock: number): void {
-    const productToUpdate = this.cartItems.find((product: Producto) => product.id_producto === productId);
+    const productToUpdate = this.cartItems.find(
+      (product: Producto) => product.id_producto === productId
+    );
     if (productToUpdate) {
       productToUpdate.stock = stock;
       this.cartProvider.updateCartItem(productToUpdate);
