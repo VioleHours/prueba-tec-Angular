@@ -1,42 +1,7 @@
-// import { Component, OnInit } from '@angular/core';
-// import { CartProviderService } from '../cart-provider.service';
-// import { ActivatedRoute } from '@angular/router'
-// import { Producto } from '../product';
-// import { ProductService } from '../product.service';
-
-// @Component({
-//   selector: 'app-cart',
-//   templateUrl: './cart.component.html',
-//   styleUrls: ['./cart.component.css']
-// })
-// export class CartComponent implements OnInit {
-//   cartItems: any = [];
-
-//   constructor(
-//     private cartProvider: CartProviderService,
-//     private route: ActivatedRoute,
-//     public productService: ProductService,
-//     ) { }
-
-//     ngOnInit(): void {
-//       this.cartItems = this.cartProvider.getProducts();
-      
-//       const params = this.route.snapshot.paramMap;
-//       this.cartProvider.cartItemsUpdated.subscribe((cartItems) => {
-//         this.cartItems = cartItems;
-//       });
-//     }
-  
-//     removeFromCart(product: any): void {
-//       this.cartProvider.removeItems(product);
-//       this.cartItems = this.cartProvider.getProducts();
-//     }
-//   }
-
 import { Component, OnInit } from '@angular/core';
 import { CartProviderService } from '../../service/cart-provider.service';
 import { ActivatedRoute } from '@angular/router';
-import { Producto } from '../../product'; // Import the Producto interface
+import { Producto } from '../../product';
 import { ProductService } from '../../service/product.service';
 
 @Component({
@@ -45,7 +10,7 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: Producto[] = []; // Use the Producto type for cartItems
+  cartItems: Producto[] = []; 
   cartIsEmpty: boolean = true;
   productCounts: any = {};
   count: number = 0;
@@ -61,7 +26,7 @@ export class CartComponent implements OnInit {
     this.loadCartData();
 
     this.cartProvider.getProducts().subscribe((cartItems) => {
-      this.cartItems = cartItems; // Update cartItems with the latest data from the cart provider
+      this.cartItems = cartItems;
       this.totalPrice();
       this.totalProducts();
       if (!this.cartIsEmpty) {
@@ -93,8 +58,8 @@ export class CartComponent implements OnInit {
   totalProducts(): void {
     let countAux = 0;
     if (this.cartItems.length > 0) {
-      this.cartItems.forEach((product: Producto) => { // Use the Producto type for product
-        countAux += product.stock; // Use the appropriate property from the Producto interface
+      this.cartItems.forEach((product: Producto) => {
+        countAux += product.stock;
       });
     }
     this.count = countAux;

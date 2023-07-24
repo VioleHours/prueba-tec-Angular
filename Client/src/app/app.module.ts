@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductComponent } from './components/product/product.component';
+import { ProductComponent } from './components/product/product.component'; 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,11 +16,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryFilterPipe } from './category-filter.pipe';
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
+    ProductComponent, 
     NavBarComponent,
     CartComponent,
     RegistroComponent,
@@ -37,6 +39,8 @@ import { CategoryFilterPipe } from './category-filter.pipe';
     RouterModule,
     MatSnackBarModule,
     ReactiveFormsModule,
+    MatCardModule,
+    MatSidenavModule,
   ],
   providers: [CartProviderService],
   bootstrap: [AppComponent],

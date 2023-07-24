@@ -1,19 +1,36 @@
-<div>
-  <select [(ngModel)]="selectedCategory" (change)="handleCategoryChange(selectedCategoryId)"> 
-    <option value="null">Todas las categorías</option>
-    <option *ngFor="let category of categories" [value]="category.id">
-      {{ category.nombre }}
-    </option>
-  </select>
-</div>
-
-<div *ngFor="let product of products | categoryFilter: selectedCategoryId">
-  <div>
-    <h2>{{ product.nombre }}</h2>
-    <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
-    <p>Precio: ${{ product.precio }}</p>
-    <p>Categoria: {{ getSubcategoryName(product.id_subcategoria) }}</p>
-    <button (click)="addToCart(product)">Agregar al carrito</button>
+<div class="container">
+  <div class="sidebar" [style.width]="showSidebar ? '200px' : '50px'">
+    <button type="button" mat-button (click)="toggleSidebar()" class="elimin">
+      <mat-icon class="custom-button2">filter_alt</mat-icon>
+    </button>
+    <select *ngIf="showSidebar" [(ngModel)]="selectedCategoryId" (change)="handleCategoryChange(selectedCategoryId)">
+      <option value="null">Todas las categorías</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.nombre }}
+      </option>
+    </select>
   </div>
-</div>
+
+  <div class="products-container" [style.margin-left]="showSidebar ? '0px' : '0px'">
+    <mat-card class="example-card" *ngFor="let product of products | categoryFilter: selectedCategoryId">
+      <mat-card-header>
+        <mat-card-title class="nameText">{{ product.nombre }}</mat-card-title>
+        <mat-card-subtitle>Categoria: {{ getSubcategoryName(product.id_subcategoria) }}</mat-card-subtitle>
+      </mat-card-header>
+      <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
+      <mat-card-content>
+        <h3>${{ formatPrice(product.precio) }}</h3>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="addToCart(product)" class="custom-button">
+          <mat-icon
+              aria-hidden="false"
+              aria-label="Icono del carrito"
+              fontIcon="shopping_cart"
+              class="custom-cart-icon"
+            ></mat-icon>
+            Agregar al carrito</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 

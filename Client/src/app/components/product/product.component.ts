@@ -9,6 +9,8 @@ import { CartProviderService } from '../../service/cart-provider.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+  showFiller = false;
+  showSidebar: boolean = false;
   products: Producto[] = [];
   cart: Producto[] = [];
   categories: Subcategoria[] = [];
@@ -57,5 +59,13 @@ export class ProductComponent implements OnInit {
   handleCategoryChange(selectedCategoryId: number): void {
     this.selectedCategoryId = selectedCategoryId;
   }  
+
+  formatPrice(price: number): string {
+    return price.toLocaleString('es-AR');
+  }
   
+  toggleSidebar(): void {
+    this.showSidebar = !this.showSidebar;
+  }
+
 }

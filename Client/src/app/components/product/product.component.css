@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.custom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10rem;
+  width: 20rem;
+  padding: 16px;
+  background-color: #f1f1f1;
+  border: 1px solid #333;
+  box-shadow: 0 2px 4px rgba(225, 89, 5, 0.2);
+  border-radius: 20px;
+}
+
+.containerFilter {
+  width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(225, 89, 5);
+  position: relative;
+  z-index: 10;
+}
+
+.containerTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100px;
+  padding: 16px;
+  background-color: rgb(248, 248, 248);
+  border-width: 3px;
+  border-style:ridge;
+  border-color: rgba(225, 89, 5, 0.455);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  transition: width 0.3s ease;
+}
+
+.example-card {
+  box-shadow: 0 10px 12px rgba(225, 89, 5, 0.182);
+  width: calc(20% - 16px);
+  height: 500px;
+}
+
+.nameText {
+  font-size: large;
+}
+
+.custom-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid rgb(225, 89, 5);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.custom-button:hover {
+  align-items: center;
+  background-color: rgb(225, 89, 5);
+  border: 2px solid #000000;
+  color: rgb(255, 255, 255);
+}
+
+.custom-cart-icon {
+  align-items: center;
+}
+
+.products-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  transition: margin-left 0.3s ease;
+}
+
+.example-sidenav-content {
+  padding: 30px;
+  height: auto;
+  overflow-y: hidden;
+  background-color: rgba(225, 89, 5);
+  border-color: #00000097;
+}
+
+h3 {
+  position: absolute;
+  bottom: 75px;
+  right: 10px;
+  left: 20px;
+  font-size: x-large;
+  color: rgba(225, 89, 5);
+}
+
+.custom-button2 {
+  top: 10px;
+  right: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(225, 89, 5);
+  padding: 10px 10px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.custom-button2:hover {
+  background-color: rgb(225, 89, 5);
+  border: 2px solid #000000;
+  color: rgb(255, 255, 255);
+}
+
+.elimin {
+    border-width: 0;
+}
