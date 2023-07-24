@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Producto, Subcategoria } from '../../product';
 import { CartProviderService } from '../../service/cart-provider.service';
@@ -13,14 +13,16 @@ export class ProductComponent implements OnInit {
   products: Producto[] = [];
   categories: Subcategoria[] = [];
   filteredProducts: Producto[] = [];
-  selectedCategoryId: number | null = null; 
+  selectedCategoryId: number | null = null;
 
   constructor(
     public productService: ProductService,
     private cartProvider: CartProviderService,
+    public changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    console.log('Component initialized.');
     this.fetchProducts();
     this.fetchCategories();
   }
@@ -28,7 +30,7 @@ export class ProductComponent implements OnInit {
   fetchProducts(): void {
     this.productService.getProducts().subscribe((products) => {
       this.products = products;
-      this.filterProducts(); 
+      this.filterProducts();
     });
   }
 
@@ -39,13 +41,15 @@ export class ProductComponent implements OnInit {
   }
 
   filterProducts(): void {
-    this.filteredProducts = this.products.filter((products) => {
-      if (this.selectedCategoryId === null) {
-        return products; 
-      }
-      return products.id_subcategoria === this.selectedCategoryId;
-    });
+    if (this.selectedCategoryId === null) {
+      this.filteredProducts = this.products;
+    } else {
+      this.filteredProducts = this.products.filter((product) => {
+        return product.id_subcategoria === Number(this.selectedCategoryId);
+      });
+    }
   }
+  
 
   addToCart(product: Producto): void {
     this.cartProvider.addToCart(product);
@@ -58,8 +62,18 @@ export class ProductComponent implements OnInit {
 
   handleCategoryChange(selectedCategoryId: number | null): void {
     this.selectedCategoryId = selectedCategoryId;
-    this.filterProducts(); 
+    if (this.selectedCategoryId === null) {
+      this.fetchProducts();
+    } else {
+      this.filterProducts();
+    }
   }
+
+  reloadProducts(): void {
+    this.fetchProducts();
+    this.filterProducts();
+    this.changeDetectorRef.detectChanges();
+}
 
   formatPrice(price: number): string {
     return price.toLocaleString('es-AR');

@@ -5,7 +5,7 @@
   max-width: 100%;
 }
 
-.custom-container {
+.filter-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 100px;
+  width: 200px;
+  height: 100vh;
   padding: 16px;
   background-color: rgb(248, 248, 248);
   border-width: 3px;
@@ -54,9 +55,9 @@
   transition: width 0.3s ease;
 }
 
-.example-card {
+.product-card {
   box-shadow: 0 10px 12px rgba(225, 89, 5, 0.182);
-  width: calc(20% - 16px);
+  flex-basis: calc(20% - 16px);
   height: 500px;
 }
 
@@ -100,7 +101,7 @@
   transition: margin-left 0.3s ease;
 }
 
-.example-sidenav-content {
+.sidenav-content {
   padding: 30px;
   height: auto;
   overflow-y: hidden;
@@ -117,7 +118,7 @@ h3 {
   color: rgba(225, 89, 5);
 }
 
-.custom-button2 {
+.filter-icon {
   top: 10px;
   right: 20px;
   left: 20px;
@@ -131,12 +132,12 @@ h3 {
   border-radius: 5px;
 }
 
-.custom-button2:hover {
+.filter-icon:hover {
   background-color: rgb(225, 89, 5);
   border: 2px solid #000000;
   color: rgb(255, 255, 255);
 }
 
-.elimin {
-    border-width: 0;
+.filter-button {
+  border-width: 0;
 }
