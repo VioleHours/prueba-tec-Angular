@@ -9,14 +9,11 @@ import { CartProviderService } from '../../service/cart-provider.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  showFiller = false;
   showSidebar: boolean = false;
   products: Producto[] = [];
-  cart: Producto[] = [];
   categories: Subcategoria[] = [];
-  selectedCategory: number | null = null;
-  selectedCategoryId: number = 0;
-  filteredProductsArray: Producto[] = [];
+  filteredProducts: Producto[] = [];
+  selectedCategoryId: number | null = null; 
 
   constructor(
     public productService: ProductService,
@@ -26,18 +23,27 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.fetchProducts();
     this.fetchCategories();
-    // this.selectedCategoryId = 0;
   }
 
   fetchProducts(): void {
     this.productService.getProducts().subscribe((products) => {
       this.products = products;
+      this.filterProducts(); 
     });
   }
 
   fetchCategories(): void {
-    this.productService.getSubcategory().subscribe((categories) => {
+    this.productService.getSubcategories().subscribe((categories) => {
       this.categories = categories;
+    });
+  }
+
+  filterProducts(): void {
+    this.filteredProducts = this.products.filter((products) => {
+      if (this.selectedCategoryId === null) {
+        return products; 
+      }
+      return products.id_subcategoria === this.selectedCategoryId;
     });
   }
 
@@ -50,22 +56,16 @@ export class ProductComponent implements OnInit {
     return subcategory ? subcategory.nombre : 'Sin subcategoría';
   }
 
-  filteredCategories(): Subcategoria[] {
-    return this.selectedCategory
-      ? this.categories.filter(category => category.id === this.selectedCategory)
-      : this.categories;
-  }
-
-  handleCategoryChange(selectedCategoryId: number): void {
+  handleCategoryChange(selectedCategoryId: number | null): void {
     this.selectedCategoryId = selectedCategoryId;
-  }  
+    this.filterProducts(); 
+  }
 
   formatPrice(price: number): string {
     return price.toLocaleString('es-AR');
   }
-  
+
   toggleSidebar(): void {
     this.showSidebar = !this.showSidebar;
   }
-
 }

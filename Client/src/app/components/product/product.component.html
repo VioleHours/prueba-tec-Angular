@@ -11,8 +11,8 @@
     </select>
   </div>
 
-  <div class="products-container" [style.margin-left]="showSidebar ? '0px' : '0px'">
-    <mat-card class="example-card" *ngFor="let product of products | categoryFilter: selectedCategoryId">
+  <div class="products-container" [style.margin-left]="showSidebar ? '200px' : '0'">
+    <mat-card class="example-card" *ngFor="let product of filteredProducts">
       <mat-card-header>
         <mat-card-title class="nameText">{{ product.nombre }}</mat-card-title>
         <mat-card-subtitle>Categoria: {{ getSubcategoryName(product.id_subcategoria) }}</mat-card-subtitle>
@@ -24,13 +24,14 @@
       <mat-card-actions align="end">
         <button mat-button (click)="addToCart(product)" class="custom-button">
           <mat-icon
-              aria-hidden="false"
-              aria-label="Icono del carrito"
-              fontIcon="add_shopping_cart"
-              class="custom-cart-icon"
-            ></mat-icon>
-            Agregar al carrito</button>
+            aria-hidden="false"
+            aria-label="Icono del carrito"
+            fontIcon="add_shopping_cart"
+            class="custom-cart-icon"
+          ></mat-icon>
+          Agregar al carrito
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
-
+</div>

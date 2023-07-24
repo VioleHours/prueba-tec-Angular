@@ -15,27 +15,27 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.apiUrlProduct}`).pipe(
+    return this.http.get<Producto[]>(this.apiUrlProduct).pipe(
       catchError(this.handleError)
     );
   }
 
-  getSubcategory(): Observable<Subcategoria[]> {
-    return this.http.get<Subcategoria[]>(`${this.apiUrlSubCat}`).pipe(
+  getSubcategories(): Observable<Subcategoria[]> {
+    return this.http.get<Subcategoria[]>(this.apiUrlSubCat).pipe(
       catchError(this.handleError)
     );
   }
 
   getCompleteImageUrl( product: Producto ): string {
-        const prefix = 'compragamer_Imganen_general_';
-        const suffix = '-med.jpg';
-        if (product.imagenes && product.imagenes.length > 0 && product.imagenes[0].nombre) {
-          const cleanedImageName = product.imagenes[0].nombre;
-          return this.baseUrl + prefix + cleanedImageName + suffix;
-        } else {
-          return this.baseUrl + 'undefined' + suffix;
-        }
-  }
+    const prefix = 'compragamer_Imganen_general_';
+    const suffix = '-med.jpg';
+    if (product.imagenes && product.imagenes.length > 0 && product.imagenes[0].nombre) {
+      const cleanedImageName = product.imagenes[0].nombre;
+      return this.baseUrl + prefix + cleanedImageName + suffix;
+    } else {
+      return this.baseUrl + 'undefined' + suffix;
+    }
+}
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error:', error);
