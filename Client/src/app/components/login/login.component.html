@@ -1,0 +1,42 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2 class="form-title">Iniciar sesión</h2>
+    <div>
+      <label for="email" class="form-label">Email:</label>
+      <input type="text" formControlName="email" id="email" class="form-input" />
+      <div
+        *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="loginForm.controls['email'].errors?.['required']">Email requerido.</div>
+        <div *ngIf="loginForm.controls['email'].errors?.['email']">Email inválido.</div>
+      </div>
+    </div>
+    <div>
+      <label for="password" class="form-label">Contraseña:</label>
+      <input
+        type="password"
+        formControlName="password"
+        id="password"
+        class="form-input"
+      />
+      <div
+        *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="loginForm.controls['password'].errors?.['required']">
+          Contraseña requerida.
+        </div>
+      </div>
+    </div>
+    <button type="submit" *ngIf="!isLoggedIn" class="submit-button">Iniciar sesión</button>
+    <button
+      type="button"
+      *ngIf="isLoggedIn"
+      (click)="logout()"
+      class="logout-button"
+    >
+      Cerrar sesión
+    </button>
+    <button class="close" (click)="closeDialog()">Cerrar</button>
+  </form>
+  

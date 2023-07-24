@@ -18,7 +18,12 @@ export class RegistroComponent implements OnInit {
   provincia: string = '';
   codigoPostal: string = '';
 
-  registroForm: FormGroup = new FormGroup({});
+  registroForm: FormGroup = new FormGroup({
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+  });
 
   constructor(private dialogRef: MatDialogRef<RegistroComponent>) {}
 
@@ -54,7 +59,8 @@ export class RegistroComponent implements OnInit {
       const userData = this.registroForm.value;
       try {
         localStorage.setItem('userData', JSON.stringify(userData));
-        this.dialogRef.close({ success: true });
+
+        this.dialogRef.close({ success: true, userData });
       } catch (error) {
         console.error('Error al guardar en localStorage:', error);
         this.dialogRef.close({ success: false });

@@ -42,6 +42,25 @@
         >
           Registro
         </button>
+        <div class="loginCont">
+          <div class="login">
+            <button
+              mat-stroked-button
+              (click)="openModalLogin()"
+              class="custom-button"
+            >
+              Iniciar sesión
+            </button>
+            <button
+              type="button"
+              *ngIf="isLoggedIn"
+              (click)="logout()"
+              class="custom-button"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
