@@ -42,12 +42,16 @@ export class NavBarComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.success === true) {
         this.snackBar.open('¡Registro exitoso!', 'Cerrar', {
-          duration:3000
+          duration: 3000,
         });
       } else {
-        this.snackBar.open('Registro cancelado o error en el registro.', 'Cerrar', {
-          duration:3000
-        });
+        this.snackBar.open(
+          'Registro cancelado o error en el registro.',
+          'Cerrar',
+          {
+            duration: 3000,
+          }
+        );
       }
       this.router.navigate(['/']);
     });

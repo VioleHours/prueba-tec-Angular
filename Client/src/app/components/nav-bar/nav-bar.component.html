@@ -1,42 +1,48 @@
 <nav class="navbar">
   <div class="container">
-      <div class="leftContainer">
-        <a routerLink="/">
-          <div class="logoContainer">
-            <img
-              class="logo"
-              src="/assets/logo-fix.png"
-              alt="Compra_Gamer_logo"
-            />
-          </div>
-        </a>
-      </div>
-        <div class="prodCont">
-          <a routerLink="/productos">
-            <div class="produ">
-              <button mat-stroked-button class="custom-button">Productos</button>
-            </div>
-          </a>
-          </div>
-      <div class="cartCont">
-        <a routerLink="/cart">
-          <button class="cartButton">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Icono del carrito"
-              fontIcon="shopping_cart"
-              class="custom-cart-icon"
-            ></mat-icon>
-            <span *ngIf="cartItems.length > 0" class="productsNumber">{{
-              cartItems.length
-            }}</span>
-          </button>
-        </a>
-      </div>
-      <div class="regCont">
-          <div class="register">
-            <button mat-stroked-button (click)="openModalRegister()" class="custom-button">Registro</button>
-          </div>
+    <div class="leftContainer">
+      <a routerLink="/">
+        <div class="logoContainer">
+          <img
+            class="logo"
+            src="/assets/logo-fix.png"
+            alt="Compra_Gamer_logo"
+          />
         </div>
+      </a>
     </div>
+    <div class="prodCont">
+      <a routerLink="/productos">
+        <div class="produ">
+          <button mat-stroked-button class="custom-button">Productos</button>
+        </div>
+      </a>
+    </div>
+    <div class="cartCont">
+      <a routerLink="/cart">
+        <button class="cartButton">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Icono del carrito"
+            fontIcon="shopping_cart"
+            class="custom-cart-icon"
+          ></mat-icon>
+          <span *ngIf="cartItems.length > 0" class="productsNumber">{{
+            cartItems.length
+          }}</span>
+        </button>
+      </a>
+    </div>
+    <div class="regCont">
+      <div class="register">
+        <button
+          mat-stroked-button
+          (click)="openModalRegister()"
+          class="custom-button"
+        >
+          Registro
+        </button>
+      </div>
+    </div>
+  </div>
 </nav>

@@ -1,40 +1,58 @@
 <div class="container">
   <div class="sidebar" [style.width]="showSidebar ? '200px' : '50px'">
-    <button type="button" mat-button (click)="toggleSidebar()" class="filter-button">
+    <button
+      type="button"
+      mat-button
+      (click)="toggleSidebar()"
+      class="filter-button"
+    >
       <mat-icon class="filter-icon">filter_alt</mat-icon>
     </button>
-    <select *ngIf="showSidebar" [(ngModel)]="selectedCategoryId" (change)="handleCategoryChange(selectedCategoryId)">
-      <option value=null>Todas las categorías</option>
+    <select
+      *ngIf="showSidebar"
+      [(ngModel)]="selectedCategoryId"
+      (change)="handleCategoryChange(selectedCategoryId)"
+    >
+      <option value="null">Todas las categorías</option>
       <option *ngFor="let category of categories" [value]="category.id">
         {{ category.nombre }}
       </option>
     </select>
-</div>
+  </div>
 
-<div class="products-container" [style.margin-left]="showSidebar ? '0px' : '0'">
-  <mat-card class="product-card" *ngFor="let product of filteredProducts">
-    <mat-card-header>
-      <mat-card-title class="nameText">{{ product.nombre }}</mat-card-title>
-      <mat-card-subtitle>Categoría: {{ getSubcategoryName(product.id_subcategoria) }}</mat-card-subtitle>
-    </mat-card-header>
-    <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
-    <mat-card-content>
-      <h3>${{ formatPrice(product.precio) }}</h3>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-button (click)="addToCart(product)" class="custom-button">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Icono del carrito"
-          fontIcon="add_shopping_cart"
-          class="custom-cart-icon"
-        ></mat-icon>
-        Agregar al carrito
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-  
+  <div
+    class="products-container"
+    [style.margin-left]="showSidebar ? '0px' : '0'"
+  >
+    <mat-card class="product-card" *ngFor="let product of filteredProducts">
+      <mat-card-header>
+        <mat-card-title class="nameText">{{ product.nombre }}</mat-card-title>
+        <mat-card-subtitle
+          >Categoría:
+          {{ getSubcategoryName(product.id_subcategoria) }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <img
+        [src]="productService.getCompleteImageUrl(product)"
+        alt="{{ product.nombre }}"
+      />
+      <mat-card-content>
+        <h3>${{ formatPrice(product.precio) }}</h3>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="addToCart(product)" class="custom-button">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Icono del carrito"
+            fontIcon="add_shopping_cart"
+            class="custom-cart-icon"
+          ></mat-icon>
+          Agregar al carrito
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
   <div *ngIf="filteredProducts.length === 0" class="no-products-message">
     No se encontraron productos para esta categoría.
   </div>
