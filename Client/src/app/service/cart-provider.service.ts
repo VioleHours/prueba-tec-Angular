@@ -1,54 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs';
-// import { Producto } from './product';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class CartProviderService {
-//   public cartItems: any = [];
-//   public cartItemsUpdated = new BehaviorSubject<any>([]);
-
-//   constructor() {}
-
-//   getProducts() {
-//     return this.cartItemsUpdated.asObservable();
-//   }
-
-//   setProducts(product: any) {
-//     this.cartItems.push(...product);
-//     this.cartItemsUpdated.next(product);
-//   }
-
-//   addToCart(product: any) {
-//     this.cartItems.push(product);
-//     this.cartItemsUpdated.next(this.cartItems);
-//     this.getTotalPrice();
-//   }
-
-//   getTotalPrice() {
-//     let totalGlobal = 0;
-//     this.cartItems.map((a: any) => {
-//       totalGlobal += a.total;
-//     });
-//     return totalGlobal;
-//   }
-
-//   removeItems(product: any) {
-//     this.cartItems.map((a: any, index: any) => {
-//       if (product === a) {
-//         this.cartItems.splice(index, 1);
-//       }
-//     });
-//     this.cartItemsUpdated.next(this.cartItems);
-//   }
-
-//   removeAllCart() {
-//     this.cartItems = [];
-//     this.cartItemsUpdated.next(this.cartItems);
-//   }
-// }
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Producto } from '../product';
@@ -72,15 +21,22 @@ export class CartProviderService {
   }
 
   addToCart(product: Producto) {
-    this.cartItems.push(product);
+    const existingProduct = this.cartItems.find((p: Producto) => p.id_producto === product.id_producto);
+    if (existingProduct) {
+      existingProduct.stock = product.stock;
+    } else {
+      this.cartItems.push(product);
+    }
     this.cartItemsUpdated.next(this.cartItems);
-    this.getTotalPrice();
   }
+  
 
   getTotalPrice() {
     let totalGlobal = 0;
-    this.cartItems.map((product: Producto) => {
-      totalGlobal += product.precio * product.stock; // Use the appropriate property from the Producto interface
+    this.cartItems.forEach((product: Producto) => {
+      if (product.stock > 0) {
+        totalGlobal += product.precio * product.stock;
+      }
     });
     return totalGlobal;
   }
@@ -96,6 +52,14 @@ export class CartProviderService {
   removeAllCart() {
     this.cartItems = [];
     this.cartItemsUpdated.next(this.cartItems);
+  }
+
+  updateCartItem(updatedProduct: Producto) {
+    const index = this.cartItems.findIndex((product: Producto) => product.id_producto === updatedProduct.id_producto);
+    if (index !== -1) {
+      this.cartItems[index].stock = updatedProduct.stock;
+      this.cartItemsUpdated.next(this.cartItems);
+    }
   }
 }
 

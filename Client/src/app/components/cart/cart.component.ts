@@ -10,11 +10,12 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: Producto[] = []; 
+  cartItems: Producto[] = [];
   cartIsEmpty: boolean = true;
   productCounts: any = {};
   count: number = 0;
   total: number = 0;
+  showRegistrationMessage: boolean = false;
 
   constructor(
     private cartProvider: CartProviderService,
@@ -40,7 +41,7 @@ export class CartComponent implements OnInit {
     if (savedCart.length > 0) {
       this.cartIsEmpty = false;
       savedCart.forEach((product: any) => {
-        this.productCounts[product.id] = product.quantity;
+        this.productCounts[product.id_producto] = product.stock;
       });
     }
   }
@@ -49,12 +50,12 @@ export class CartComponent implements OnInit {
     let totalAux = 0;
     if (this.cartItems.length > 0) {
       this.cartItems.forEach((product: Producto) => {
-        totalAux += product.precio * product.stock;
+        totalAux += product.precio * this.productCounts[product.id_producto];
       });
     }
     this.total = totalAux;
   }
-  
+
   totalProducts(): void {
     let countAux = 0;
     if (this.cartItems.length > 0) {
@@ -67,6 +68,13 @@ export class CartComponent implements OnInit {
 
   handleRemove(productId: number): void {
     this.cartProvider.removeItems(productId);
+    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const updatedCart = savedCart.filter((product: any) => product.id_producto !== productId);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    this.loadCartData();
+    this.totalPrice();
+    this.totalProducts();
   }
 
   handleIncrement(productId: number): void {
@@ -74,12 +82,16 @@ export class CartComponent implements OnInit {
     const productToUpdate = this.cartItems.find((product: Producto) => product.id_producto === productId);
     if (productToUpdate) {
       productToUpdate.stock = this.productCounts[productId];
-      this.cartProvider.addToCart(productToUpdate);
+      this.cartProvider.updateCartItem(productToUpdate);
+      this.total += productToUpdate.precio;
     }
+  
+    this.totalProducts();
   }
   
+
   handleDecrement(productId: number): void {
-    this.productCounts[productId] = (this.productCounts[productId] || 0) - 1;
+    this.productCounts[productId] = (this.productCounts[productId] || 1) - 1;
     if (this.productCounts[productId] <= 0) {
       delete this.productCounts[productId];
       this.cartProvider.removeItems(productId);
@@ -90,5 +102,24 @@ export class CartComponent implements OnInit {
         this.cartProvider.addToCart(productToUpdate);
       }
     }
-  }  
+
+    this.totalPrice();
+    this.totalProducts();
+  }
+
+  updateCartItemStock(productId: number, stock: number): void {
+    const productToUpdate = this.cartItems.find((product: Producto) => product.id_producto === productId);
+    if (productToUpdate) {
+      productToUpdate.stock = stock;
+      this.cartProvider.updateCartItem(productToUpdate);
+    }
+  }
+
+  handleFinalizePurchase(): void {
+    this.showRegistrationMessage = true;
+  }
+
+  closeRegistrationMessage(): void {
+    this.showRegistrationMessage = false;
+  }
 }
