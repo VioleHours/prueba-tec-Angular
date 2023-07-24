@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartProviderService } from '../../service/cart-provider.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../product';
 import { ProductService } from '../../service/product.service';
 
@@ -20,11 +20,20 @@ export class CartComponent implements OnInit {
   constructor(
     private cartProvider: CartProviderService,
     private route: ActivatedRoute,
-    public productService: ProductService
+    public productService: ProductService,
+    private router: Router // Inyectar Router
   ) {}
 
   ngOnInit(): void {
     this.loadCartData();
+    const savedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (savedCart.length > 0) {
+      this.cartIsEmpty = false;
+      this.cartItems = savedCart;
+      this.loadCartData();
+      this.totalPrice();
+      this.totalProducts();
+    }
 
     this.cartProvider.getProducts().subscribe((cartItems) => {
       this.cartItems = cartItems;
@@ -51,19 +60,26 @@ export class CartComponent implements OnInit {
     }
   }
 
+  formatPrice(price: number): string {
+    return price.toLocaleString('es-AR');
+  }
+
   totalPrice(): void {
     let totalAux = 0;
+
     if (this.cartItems.length > 0) {
       this.cartItems.forEach((product: Producto) => {
         const quantity = this.productCounts[product.id_producto] || 0;
-        totalAux += product.precio * quantity;
+        const productPrice = product.precio;
+        totalAux += productPrice * quantity;
       });
     }
+
     this.total = totalAux;
   }
 
   totalProducts(): void {
-    let countAux = 0;
+    let countAux = 1;
     if (this.cartItems.length > 0) {
       this.cartItems.forEach((product: Producto) => {
         countAux += product.stock;
@@ -129,7 +145,11 @@ export class CartComponent implements OnInit {
   }
 
   handleFinalizePurchase(): void {
-    this.showRegistrationMessage = true;
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      alert('compra exitosa')
+    } else {
+      this.showRegistrationMessage = true;
+    }
   }
 
   closeRegistrationMessage(): void {

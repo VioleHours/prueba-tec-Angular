@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,10 +14,10 @@ import { CartProviderService } from './service/cart-provider.service';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegistroComponent } from './components/registro/registro.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryFilterPipe } from './category-filter.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     CartComponent,
     RegistroComponent,
     CategoryFilterPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

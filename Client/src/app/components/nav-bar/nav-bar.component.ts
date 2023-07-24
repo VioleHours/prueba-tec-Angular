@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartProviderService } from '../../service/cart-provider.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistroComponent } from '../registro/registro.component';
+import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -27,6 +28,9 @@ export class NavBarComponent {
     this.cartProvider.cartItemsUpdated.subscribe((cartItems) => {
       this.cartItems = cartItems;
     });
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    this.isLoggedIn = isLoggedIn === 'true';
   }
 
   removeFromCart(product: any): void {
@@ -41,9 +45,12 @@ export class NavBarComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.success === true) {
+        localStorage.setItem('isLoggedIn', 'true');
+        this.isLoggedIn = true;
         this.snackBar.open('¡Registro exitoso!', 'Cerrar', {
           duration: 3000,
         });
+        this.router.navigate(['/productos']);
       } else {
         this.snackBar.open(
           'Registro cancelado o error en el registro.',
@@ -53,7 +60,6 @@ export class NavBarComponent {
           }
         );
       }
-      this.router.navigate(['/']);
     });
   }
 
@@ -61,5 +67,29 @@ export class NavBarComponent {
     this.snackBar.open(mesagge, action, {
       duration: 3000,
     });
+  }
+
+  openModalLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.success === true) {
+        this.isLoggedIn = true;
+        this.snackBar.open('¡Inicio de sesión exitoso!', 'Cerrar', {
+          duration: 3000,
+        });
+      } else {
+        this.snackBar.open('Inicio de sesión cancelado o error en el inicio de sesión.', 'Cerrar', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  logout() {
+    localStorage.removeItem('isLoggedIn');
+    this.isLoggedIn = false;
   }
 }
