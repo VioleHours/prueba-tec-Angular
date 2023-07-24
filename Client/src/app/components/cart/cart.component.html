@@ -1,101 +1,47 @@
-<div class="cart-container">
-  <a routerLink="/">
-    <button class="backButton">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <path fill="none" d="M0 0h24v24H0z" />
-        <path
-          d="M20.59 12H5.41l4.29-4.29a1 1 0 1 0-1.42-1.42l-6 6a1 1 0 0 0 0 1.42l6 6a1 1 0 0 0 1.42-1.42L5.41 12h15.18z"
-        />
-      </svg>
-    </button>
-  </a>
-  <div class="cartProducts">
-    <div class="resumeHeader">
-      <h1 class="resumeTitle">Resumen de compra</h1>
-    </div>
-    <div class="resumeContainer">
-      <div *ngFor="let product of cartItems" class="productContainer">
-        <div class="productImage">
-          <img
-            [src]="productService.getCompleteImageUrl(product)"
-            alt="{{ product.nombre }}"
-          />
+<mat-card class="cart-card">
+  <div *ngFor="let product of cartItems" class="productContainer">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{ product.nombre }}</mat-card-title>
+        <mat-card-subtitle>$ {{ product.precio | number }}</mat-card-subtitle>
+      </mat-card-title-group>
+      <img [src]="productService.getCompleteImageUrl(product)" alt="{{ product.nombre }}">
+    </mat-card-header>
+    <mat-card-content>
+      <div class="productInfo">
+        <p class="productPrice">$ {{ product.precio | number }}</p>
+        <div>
+          <p *ngIf="product.vendible">
+            Envío: <strong>gratis</strong>
+          </p>
         </div>
-        <div class="productInfo">
-          <h1 class="productTitle">{{ product.nombre }}</h1>
-          <div
-            *ngIf="product.destacado; else originalPrice"
-            class="productPricesContainer"
-          >
-            <p class="productPriceDiscount">
-              $ {{ product.stock * product.precio }}
-            </p>
-            <p class="productPrice">$ {{ product.stock * product.precio }}</p>
-          </div>
-          <ng-template #originalPrice>
-            <p class="productPrice">$ {{ product.stock * product.precio }}</p>
-          </ng-template>
-          <div>
-            <p *ngIf="product.vendible; else shippingCost">
-              Envío: <strong>gratis</strong>
-            </p>
-            <ng-template #shippingCost>
-              <p>Envío: <strong>se sumará en el total de la compra</strong></p>
-            </ng-template>
-          </div>
-        </div>
-        <div class="productActions">
-          <div class="quantityContainer">
-            <button
-              class="quantityButton"
-              (click)="handleDecrement(product.id_producto)"
-            >
-              -
-            </button>
-            <span class="quantity">
-              {{ productCounts[product.id_producto] || 1 }}
-            </span>
-            <button
-              class="quantityButton"
-              (click)="handleIncrement(product.id_producto)"
-            >
-              +
-            </button>
-          </div>
-          <button
-            class="deleteButton"
-            (click)="handleRemove(product.id_producto)"
-          >
-            Eliminar del carrito
+      </div>
+      <div class="productActions">
+        <div class="quantityContainer">
+          <button class="custom-button quantityButton" (click)="handleDecrement(product.id_producto)">
+            <mat-icon class="custom-icon">-</mat-icon>
+          </button>
+          <span class="quantity">{{ productCounts[product.id_producto] || 1 }}</span>
+          <button class="custom-button quantityButton" (click)="handleIncrement(product.id_producto)">
+            <mat-icon class="custom-icon">+</mat-icon>
           </button>
         </div>
+        <button class="deleteButton" (click)="handleRemove(product.id_producto)">Eliminar del carrito</button>
       </div>
-    </div>
-    <div class="resumeContent">
-      <div class="resumeDetails">
-        <p class="resumeText">({{ count }}) Productos</p>
-        <p class="resumePrice">Total $ {{ total }}</p>
-      </div>
-    </div>
-    <div class="resumeActions"></div>
+    </mat-card-content>
   </div>
-  <h2 class="titleProducts">Productos relacionados</h2>
-  <div class="productContainer"></div>
+
+  <div class="resumeContent">
+    <div class="resumeDetails">
+      <p class="resumePrice">Total $ {{ total | number }}</p>
+    </div>
+  </div>
+
+  <button class="custom-button finalizeButton" (click)="handleFinalizePurchase()">Finalizar compra</button>
+</mat-card>
+
+<div class="registrationMessage" *ngIf="showRegistrationMessage">
+  <p>Para continuar con la compra, primero debes registrarte o iniciar sesión.</p>
+  <button class="custom-button closeMessageButton" (click)="closeRegistrationMessage()">Cerrar</button>
 </div>
 
-<!-- <ng-container *ngIf="showModal">
-    <div class="modal">
-      <div class="modalContent">
-        <div class="closeModal" (click)="handleModal($event)">X</div>
-        <h2>Hola!</h2>
-        <p>Para comprar, ingresa a tu cuenta</p>
-        <div>
-        </div>
-      </div>
-    </div>
-  </ng-container> -->
